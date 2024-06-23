@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8697659003133758977}
   - component: {fileID: 7023592570330118015}
   - component: {fileID: 994414490635291327}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ducko
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7fa9c0c7e0e6b449210f480c6d3ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 2325110891464742182, guid: 66734ad3fbfb94a4c8bcef434d7a9460,
+    type: 3}
+  launchAction:
+    m_Name: Launch
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 343c4096-2897-4f2b-9b98-8c20d205617a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3242ce2e-6aa5-4560-b0ed-f10d542a7a80
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Launch
+      m_Flags: 0
+    m_Flags: 0
   MoveAction:
     m_Name: Move
     m_Type: 0
@@ -188,6 +207,9 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
+  speed: 3
+  maxHealth: 5
+  timeInvincible: 3
 --- !u!50 &7023592570330118015
 Rigidbody2D:
   serializedVersion: 4
@@ -212,7 +234,7 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 0
-  m_SleepingMode: 1
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!61 &994414490635291327
