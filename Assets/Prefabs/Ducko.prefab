@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8697659003133758977}
   - component: {fileID: 7023592570330118015}
   - component: {fileID: 994414490635291327}
+  - component: {fileID: 1473125388617114667}
   m_Layer: 8
   m_Name: Ducko
   m_TagString: Untagged
@@ -99,25 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7fa9c0c7e0e6b449210f480c6d3ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 2325110891464742182, guid: 66734ad3fbfb94a4c8bcef434d7a9460,
-    type: 3}
-  launchAction:
-    m_Name: Launch
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: 343c4096-2897-4f2b-9b98-8c20d205617a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 3242ce2e-6aa5-4560-b0ed-f10d542a7a80
-      m_Path: <Keyboard>/c
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Launch
-      m_Flags: 0
-    m_Flags: 0
   MoveAction:
     m_Name: Move
     m_Type: 0
@@ -210,6 +192,25 @@ MonoBehaviour:
   speed: 3
   maxHealth: 5
   timeInvincible: 3
+  projectilePrefab: {fileID: 2325110891464742182, guid: 66734ad3fbfb94a4c8bcef434d7a9460,
+    type: 3}
+  launchAction:
+    m_Name: Launch
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 343c4096-2897-4f2b-9b98-8c20d205617a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3242ce2e-6aa5-4560-b0ed-f10d542a7a80
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Launch
+      m_Flags: 0
+    m_Flags: 0
 --- !u!50 &7023592570330118015
 Rigidbody2D:
   serializedVersion: 4
@@ -282,3 +283,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.77, y: 0.6471698}
   m_EdgeRadius: 0
+--- !u!95 &1473125388617114667
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564627505078477341}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b77822e0485373d40b5beb92e9a5e728, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

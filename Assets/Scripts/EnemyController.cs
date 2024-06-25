@@ -7,18 +7,21 @@ public class EnemyController : MonoBehaviour
 {
    //Movimento
     Rigidbody2D rigidbody2d;
-    float speed = 2.5f; 
+    float speed = 2.0f; 
     public bool vertical;
 
     //Patrulha
     int direction = 1;
-    float changeTime = 1.5f;
-    float timer; 
+    float changeTime = 1.3f;
+    float timer;
+
+    Animator animator;
 
     bool aggressive = true;
    void Start()
    {
        rigidbody2d = GetComponent<Rigidbody2D>();
+       animator = GetComponent<Animator>();
        timer = changeTime;
    }
 
@@ -38,16 +41,21 @@ public class EnemyController : MonoBehaviour
 
   void FixedUpdate()
   {    
-        if(!aggressive) { return; }
+       if(!aggressive) { return; }
+
        Vector2 position = rigidbody2d.position;
        if (vertical)
        {
            position.y = position.y + speed * direction * Time.deltaTime;
-       }
+           animator.SetFloat("Move X", 0);
+           animator.SetFloat("Move Y", direction);
+        }
        else
        {
            position.x = position.x + speed * direction * Time.deltaTime;
-       }
+           animator.SetFloat("Move X", direction);
+           animator.SetFloat("Move Y", 0);
+        }
        rigidbody2d.MovePosition(position);
 
 
@@ -69,6 +77,7 @@ public class EnemyController : MonoBehaviour
     {
         aggressive = false;
         rigidbody2d.simulated = false;
+        //animator.SetTrigger("Fixed");
         //Destroy(gameObject);
     }
 
