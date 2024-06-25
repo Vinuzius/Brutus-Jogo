@@ -15,13 +15,19 @@ public class EnemyController : MonoBehaviour
     float changeTime = 1.3f;
     float timer;
 
+    //Animacao e Audio
     Animator animator;
+    AudioSource audioSource;
 
+    //Consertado ou não
     bool aggressive = true;
+
+
    void Start()
    {
        rigidbody2d = GetComponent<Rigidbody2D>();
        animator = GetComponent<Animator>();
+       audioSource = GetComponent<AudioSource>();
        timer = changeTime;
    }
 
@@ -33,9 +39,9 @@ public class EnemyController : MonoBehaviour
       { // Quando timer menor que 0 vai trocar a direção e reseta o timer
         direction = -direction;
         timer = changeTime;
-        int randomNumber = Random.Range(0, 10);
-        if(randomNumber % 2 == 0) { vertical = false; }
-        else { vertical = true; }
+        //int randomNumber = Random.Range(0, 10);
+        //if(randomNumber % 2 == 0) { vertical = false; }
+        //else { vertical = true; }
       }
    }
 
@@ -69,15 +75,16 @@ public class EnemyController : MonoBehaviour
        if (player != null)
        {
            player.ChangeHealth(-1);
-           Debug.Log("Collision "+ other.gameObject);
        }
    }
 
+    // Nesse jogo voce conserta o inimigo em vez de destruir.
     public void Fix()
-    {
+    {   //Vai tornar ele manso e desativar o andar rigidbody dele.
         aggressive = false;
         rigidbody2d.simulated = false;
         //animator.SetTrigger("Fixed");
+        audioSource.Stop();
         //Destroy(gameObject);
     }
 

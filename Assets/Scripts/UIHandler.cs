@@ -8,7 +8,7 @@ public class UIHandler : MonoBehaviour
     private VisualElement m_Healthbar;
     public static UIHandler instance {get; private set; }
 
-    public float displayTime = 4.0f;
+    public float displayTime = 2.2f;
     private VisualElement m_NonPlayerDialogue;
     private float m_TimerDisplay;
 

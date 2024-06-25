@@ -17,21 +17,22 @@ public class PlayerController : MonoBehaviour
    int currentHealth;
    public int health {get { return currentHealth; } }
 
-   // Variaveis de tempo de Invencibilidade ao tomar dano
+   // Variaveis de tempo de Invencibilidade ao tomar dano //
    public float timeInvincible = 3.0f;
    bool isInvincible;
    float damageCooldown;
 
-   // Variaveis de projetil
+   // Variaveis de projetil //
    public GameObject projectilePrefab;
    public InputAction launchAction;
 
-   // Variaveis de animação.
+   // Variaveis de animação //
    Animator animator;
    Vector2 moveDirection = new Vector2(1,0);
 
-   //
+   // Variaveis de dialogo e Música //
    public InputAction talkAction;
+   AudioSource audioSource;
 
 
     // Start é chamado antes de começar a rodar
@@ -47,8 +48,9 @@ public class PlayerController : MonoBehaviour
 
       rigidbody2d = GetComponent<Rigidbody2D>();
       animator = GetComponent<Animator>();
+      audioSource = GetComponent<AudioSource>();
 
-      currentHealth = maxHealth;
+        currentHealth = maxHealth;
    }
 
    // Update atualiza a cada frame
@@ -102,20 +104,23 @@ public class PlayerController : MonoBehaviour
       UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
    }
 
+    //Função para lançamento de projéteis
    void Launch(InputAction.CallbackContext context)
    {
       GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
       Projectile projectile = projectileObject.GetComponent<Projectile>();
       projectile.Launch(moveDirection,300);
 
-        animator.SetTrigger("Launch");
+      animator.SetTrigger("Launch");
    }
    
+    //Função para realizar dialogo.
    void FindFriend(InputAction.CallbackContext context)
    {
+        // Raycast seria uma espécie de "raio" que vai sair de um lugar, definido com um tamanho
         RaycastHit2D hit = Physics2D.Raycast(rigidbody2d.position + Vector2.up * 0.2f, moveDirection, 1.5f, LayerMask.GetMask("NPC"));
         if (hit.collider != null)
-        {
+        {   // Se o raio colidir com algo e for um NPC, entao mostre o diálogo.
             NonPlayerCharacter character = hit.collider.GetComponent<NonPlayerCharacter>();
             if(character != null)
             {
@@ -123,4 +128,10 @@ public class PlayerController : MonoBehaviour
             }
         }
    }
+
+    //PlaySound se refere a sons que o personagem pode fazer.
+    public void PlaySound(AudioClip clip)
+    {
+        audioSource.PlayOneShot(clip);
+    }
 }
