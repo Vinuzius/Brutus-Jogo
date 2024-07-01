@@ -132,6 +132,7 @@ MonoBehaviour:
   jumpImpulse: 8
   walkSpeed: 7.5
   runSpeed: 10
+  airWalkSpeed: 5
   _isMoving: 0
   _isRunning: 0
   _isFacingRight: 1
@@ -183,7 +184,19 @@ MonoBehaviour:
     m_ActionId: 1b5d8938-e001-48cc-b9bd-5b5542974b99
     m_ActionName: Player/Look[/Mouse/delta]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8545864437289662852}
+        m_TargetAssemblyTypeName: JogadorController, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 96a95551-90fc-43ab-ba00-2e25e4b70376
     m_ActionName: Player/Attack[/Mouse/leftButton,/SHANWAN PS3 PC Gamepad/trigger]
   - m_PersistentCalls:
@@ -347,4 +360,8 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   grounDistance: 0.05
+  wallDistance: 0.2
+  ceilingDistance: 0.05
   _isGrounded: 1
+  _isOnWall: 1
+  _isOnCeiling: 1

@@ -19,24 +19,31 @@ public class JogadorController : MonoBehaviour
     {
         get
         {
-            if(IsMoving && !touchingDirections.IsOnWall)
+            if(CanMove)
             {
-                if(touchingDirections.IsGrounded)
-                {   //No chão
-                    if(IsRunning) // Se está correndo
-                    {
-                        return runSpeed;
+                if(IsMoving && !touchingDirections.IsOnWall)
+                {
+                    if(touchingDirections.IsGrounded)
+                    {   //No chão
+                        if(IsRunning) // Se está correndo
+                        {
+                            return runSpeed;
+                        }
+                        else         // Se está andando
+                            return walkSpeed;
                     }
-                    else         // Se está andando
-                        return walkSpeed;
+                    else
+                    {   //No ar
+                        return airWalkSpeed;
+                    }
                 }
-                else
-                {   //No ar
-                    return airWalkSpeed;
-                }
+                else  //Idle speed is 0  
+                    return 0;
             }
-            else  //Idle speed is 0  
+
+            else // Movimento Bloqueado
                 return 0;
+
         }
     }
 
@@ -78,6 +85,11 @@ public class JogadorController : MonoBehaviour
         } 
     }
     
+    public bool CanMove
+    {
+        get { return animator.GetBool(AnimationStrings.canMove); }
+    }
+
     //Variaveis para pegar componentes do personagem
     new Rigidbody2D rigidbody2D;
     Animator animator;
@@ -104,6 +116,17 @@ public class JogadorController : MonoBehaviour
         animator.SetFloat(AnimationStrings.yVelocity,rigidbody2D.velocity.y);
     }
 
+    private void SetFacingDirection(Vector2 moveInput)
+    {
+        if(moveInput.x > 0 && !IsFacingRight)
+        {   //Mover para direita
+            IsFacingRight = true;
+        }
+        else if(moveInput.x < 0 && IsFacingRight)
+        {   //Mover para esquerda
+            IsFacingRight = false;
+        }
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -122,24 +145,19 @@ public class JogadorController : MonoBehaviour
             IsRunning = false;
         }
     }
-
-    private void SetFacingDirection(Vector2 moveInput)
-    {
-        if(moveInput.x > 0 && !IsFacingRight)
-        {   //Mover para direita
-            IsFacingRight = true;
-        }
-        else if(moveInput.x < 0 && IsFacingRight)
-        {   //Mover para esquerda
-            IsFacingRight = false;
-        }
-    }
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(context.started && touchingDirections.IsGrounded)
+        if(context.started && touchingDirections.IsGrounded && CanMove)
         {
-            animator.SetTrigger(AnimationStrings.jump);
+            animator.SetTrigger(AnimationStrings.jumpTrigger);
             rigidbody2D.velocity = new Vector2(rigidbody2D.velocity.x, jumpImpulse);
+        }
+    }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            animator.SetTrigger(AnimationStrings.attackTrigger);
         }
     }
 }
@@ -150,5 +168,7 @@ internal class AnimationStrings
     internal static string isMoving = "isMoving";
     internal static string isRunning = "isRunning";
     internal static string yVelocity = "yVelocity";
-    internal static string jump = "jump";
+    internal static string jumpTrigger = "jump";
+    internal static string attackTrigger = "attack";
+    internal static string canMove= "canMove";
 }
