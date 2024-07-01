@@ -16,7 +16,7 @@ TagManager:
   - player
   - projectile
   - 
-  - 
+  - Ground
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 2766579207
+    locked: 0
+  - name: Ground
+    uniqueID: 2685062983
     locked: 0
   - name: Default
     uniqueID: 0
