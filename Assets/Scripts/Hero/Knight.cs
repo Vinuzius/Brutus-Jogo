@@ -10,23 +10,8 @@ public class Knight : MonoBehaviour
 	 
 	 public enum WalkableDirection { Right, Left }
 	 private WalkableDirection _walkDirection;
-	 public WalkableDirection WalkDirection
-	 {
-	 	get { return _walkDirection }
-	 	set 
-	 	{
-	 		if(_walkDirection  ! = value)
-	 		{	//Trocar a direção
-	 			gameObject.transform.localScale = new Vector2(gameoObject.tansform.localScale.x * -1, gameoObject.tansform.localScale.y);
-	 			
-	 			if(value = WalkableDirection.Right)
-	 			{
-	 			}
-	 		}
-	 	 _walkDirection = value; 
-	 	}
-	 	
-	 } 
+	 public WalkableDirection WalkDirection;
+
     // Start is called before the first frame update
     void Awake()
     {

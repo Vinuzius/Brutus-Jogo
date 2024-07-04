@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Ruby-Refeito-aaaaaa.sln"
+    "dotnet.defaultSolution": "Ruby-Refeito-V2022.3.sln"
 }
