@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections) )]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class JogadorController : MonoBehaviour
 {
     //Variaveis de movimento
     Vector2 moveInput;
     TouchingDirections touchingDirections;
+    Damageable damageable;
     public float jumpImpulse = 8f;
     public float walkSpeed = 7f;
     public float runSpeed = 10f;
@@ -90,6 +92,16 @@ public class JogadorController : MonoBehaviour
         get { return animator.GetBool(AnimationStrings.canMove); }
     }
 
+    public bool IsAlive
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.isAlive);
+        }
+    }
+
+
+
     //Variaveis para pegar componentes do personagem
     new Rigidbody2D rigidbody2D;
     Animator animator;
@@ -100,20 +112,15 @@ public class JogadorController : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         touchingDirections = GetComponent<TouchingDirections>();
-    }
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-        
+        damageable = GetComponent<Damageable>();
     }
 
     private void FixedUpdate()
     {
-        rigidbody2D.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rigidbody2D.velocity.y);
-        animator.SetFloat(AnimationStrings.yVelocity,rigidbody2D.velocity.y);
+        if(!damageable.LockVelocity)
+            rigidbody2D.velocity = new Vector2(moveInput.x * CurrentMoveSpeed, rigidbody2D.velocity.y);
+
+        animator.SetFloat(AnimationStrings.yVelocity, rigidbody2D.velocity.y);
     }
 
     private void SetFacingDirection(Vector2 moveInput)
@@ -130,9 +137,14 @@ public class JogadorController : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
+        if(IsAlive)
+        {
+            IsMoving = moveInput != Vector2.zero;
 
-        SetFacingDirection(moveInput);
+            SetFacingDirection(moveInput);
+        }
+        else { IsMoving = false; }
+
     }
     public void OnRun(InputAction.CallbackContext context)
     {
@@ -160,15 +172,10 @@ public class JogadorController : MonoBehaviour
             animator.SetTrigger(AnimationStrings.attackTrigger);
         }
     }
+    public void OnHit(int damage,Vector2 knockback)
+    {
+        rigidbody2D.velocity = new Vector2(knockback.x, rigidbody2D.velocity.y + knockback.y);
+    }
 }
 
 
-internal class AnimationStrings
-{
-    internal static string isMoving = "isMoving";
-    internal static string isRunning = "isRunning";
-    internal static string yVelocity = "yVelocity";
-    internal static string jumpTrigger = "jump";
-    internal static string attackTrigger = "attack";
-    internal static string canMove= "canMove";
-}

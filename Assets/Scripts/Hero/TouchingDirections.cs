@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TouchingDirections : MonoBehaviour
 {
+  //Variaveis para falar os limites das direções
     public ContactFilter2D castFilter;
     public float grounDistance = 0.05f;
     public float wallDistance = 0.2f;
@@ -12,9 +13,12 @@ public class TouchingDirections : MonoBehaviour
     RaycastHit2D[] groundhits = new RaycastHit2D[5];
     RaycastHit2D[] wallHits = new RaycastHit2D[5];
     RaycastHit2D[] ceilingHits = new RaycastHit2D[5];
+    
+    //Variaveis de componentes
     CapsuleCollider2D touchingCol;
     Animator animator;
 
+    //Variaveis para checkar se está no chão, na parede ou no teto
     [SerializeField]
     private bool _isGrounded = true;
     public bool IsGrounded 

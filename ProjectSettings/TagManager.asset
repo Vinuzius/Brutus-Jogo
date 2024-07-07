@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - player
-  - projectile
-  - 
   - Ground
+  - Player
+  - Enemy
+  - PlayerHitbox
+  - EnemyHitbox
+  - GroundDetection
   - 
   - 
   - 
@@ -34,9 +34,9 @@ TagManager:
   - 
   - 
   - 
-  - Confiner
-  - NPC
-  - Camera
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Background
     uniqueID: 2766579207
