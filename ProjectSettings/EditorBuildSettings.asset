@@ -12,8 +12,11 @@ EditorBuildSettings:
     path: Assets/Scenes/SettingsMenu.unity
     guid: ac2a9f1192d7578439ef4f3e0af54e28
   - enabled: 1
-    path: Assets/Scenes/Fase_1.unity
-    guid: a145f48161101db4eb065c372380fe38
+    path: Assets/Scenes/Fase_Ofc.unity
+    guid: b4b1c0948c36cff4ea86dfaa3b0c29bf
+  - enabled: 1
+    path: Assets/Scenes/FinalScene.unity
+    guid: a873b80e5520e1afd99a4da0c4190478
   - enabled: 1
     path: Assets/Scenes/QuitScene.unity
     guid: 3a42a84307f42a84e90adeef09778a1b

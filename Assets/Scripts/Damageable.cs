@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
     Animator animator;
+    public Slider slider;
 
     //Variaveis de vida
     [SerializeField]    // Vida máxima
-    private int _maxHealth = 100;
+    private int _maxHealth;
     public int MaxHealth
     {
         get { return _maxHealth; }
@@ -21,7 +23,7 @@ public class Damageable : MonoBehaviour
     }
 
     [SerializeField]    // Vida Atual
-    private int _health = 100;
+    private int _health;
     public int Health
     {
         get{ return _health; }
@@ -53,7 +55,6 @@ public class Damageable : MonoBehaviour
         {
             _isAlive = value;
             animator.SetBool(AnimationStrings.isAlive, value);
-            Debug.Log("IsAlive set " + value);
         } 
     }
     
@@ -66,6 +67,13 @@ public class Damageable : MonoBehaviour
     private void Awake() 
     {
         animator = GetComponent<Animator>();
+
+        if(slider != null)
+        {
+            slider.maxValue = MaxHealth; 
+            slider.value = Health;
+        }
+
     }
     
     private void Update() 
@@ -87,8 +95,10 @@ public class Damageable : MonoBehaviour
     {   //Returna se conseguiu dar dano ou não
         if(IsAlive && !isInvincible)
         {
-            Health -= damage;
+            Health -= damage;     
             isInvincible = true;
+            if(slider != null)
+                slider.value = Health;
 
             animator.SetTrigger(AnimationStrings.hitTrigger);
             LockVelocity = true;
@@ -106,11 +116,15 @@ public class Damageable : MonoBehaviour
         if(IsAlive)
         {
             int Curou = Health;
-            Health = Mathf.Clamp(Health + healthRecupera, 0, MaxHealth);
-            if(Curou != Health) // Se ele curou então é verdadeiro 
+            Health = Mathf.Clamp(Health + healthRecupera, 0, MaxHealth);     
+            if(slider != null)       
+                slider.value = Health;
+            if(Curou != Health) // Se ele curou então é verdadeiro              
                 return true;
         }
         // Caso nao tenha curado é falso
         return false;
     }
+
+
 }

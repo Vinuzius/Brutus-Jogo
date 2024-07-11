@@ -12,7 +12,7 @@ public class JogadorController : MonoBehaviour
     //Variaveis de movimento
     Vector2 moveInput;
     TouchingDirections touchingDirections;
-    Damageable damageable;
+    public Damageable damageable;
     
     public float jumpImpulse = 8f;
     public float walkSpeed = 7f;

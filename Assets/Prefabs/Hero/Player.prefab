@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc14984f6cf5a94e9a1e58052df6028, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 15
+  attackDamage: 10
   knockback: {x: 2, y: 0.5}
 --- !u!1 &2096401040243598590
 GameObject:
@@ -118,9 +118,10 @@ GameObject:
   - component: {fileID: 7796537307349383253}
   - component: {fileID: 5717537071712774827}
   - component: {fileID: 1773611397191186340}
-  m_Layer: 0
+  - component: {fileID: 1900855993454821538}
+  m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,6 +376,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: aa828efa-92a3-49f3-af8c-2531e8c0918a
     m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 80cac586-1226-426a-854f-d2ca26738d25
+    m_ActionName: UI/Escape[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -495,8 +500,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _maxHealth: 100
-  _health: 100
+  _maxHealth: 3
+  _health: 3
   _isAlive: 1
   isInvincible: 0
   invencibleTimer: 0.5
+--- !u!114 &1900855993454821538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096401040243598590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e9fdc89e908ff9f6b3f57b9ee45a002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

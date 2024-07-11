@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b45812223513ed4ebb2fee107b81c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthRecupera: 1
+  spinVelocidade: {x: 0, y: 180, z: 0}
 --- !u!70 &1197370103101245623
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

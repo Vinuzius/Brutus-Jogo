@@ -5,7 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class Respawn : MonoBehaviour
 {
-    public Damageable damageable;
+    //[SerializeField] private JogadorController player;
+    [SerializeField] private Damageable damage;
+
+    private void Start() {
+        damage = GetComponent<Damageable>();
+    }
+    private void Update() 
+    {
+       if(damage.Health <=0)
+        Death();
+    }
     public void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.CompareTag("Player"))
@@ -17,10 +27,7 @@ public class Respawn : MonoBehaviour
 
     public void Death()
     {
-        Damageable personagem = damageable;
-        if(personagem.Health <= 0)
-        {
-            Debug.Log("voce morreu");
-        }
+        Scene cenaAtual = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(cenaAtual.name);
     }
 }
